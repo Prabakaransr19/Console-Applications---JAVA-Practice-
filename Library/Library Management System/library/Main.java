@@ -12,6 +12,7 @@ public class Main {
             System.out.println("2.Exit ");
             System.out.println();
             int choice = sc.nextInt();
+            sc.nextLine();
             switch (choice){
                 case 1:
                     User user;

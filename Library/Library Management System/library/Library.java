@@ -17,6 +17,7 @@ public class Library {
         double price = sc.nextDouble();
         System.out.println("Enter the Quantity of the book : ");
         int qty = sc.nextInt();
+        sc.nextLine();
         if(books.containsKey(id)){
             System.out.println("This book already exists , you want to increase the quantity (press y to continue):");
             char ch = sc.next().charAt(0);
@@ -42,10 +43,12 @@ public class Library {
         System.out.println("2.Search by Title");
         System.out.println("3.Exit");
         int ch = sc.nextInt();
+        sc.nextLine();
         switch (ch){
             case 1:
                 System.out.println("Enter book id : ");
                 int bid = sc.nextInt();
+                sc.nextLine();
                 if(books.get(bid)==null){
                     System.out.println("No book found with given ID");
                     return;

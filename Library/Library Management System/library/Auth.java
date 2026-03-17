@@ -81,6 +81,36 @@ public class Auth {
         }
     }
     public void borrowerMenu(String email){
-
+        while(true){
+            System.out.println("Welcome "+users.get(email).getUserName()+" !!");
+            System.out.println("Enter your choice ");
+            System.out.println("1.View Books");
+            System.out.println("2.Rent a Book");
+            System.out.println("3.Return a Book");
+            System.out.println("4.Renew a book");
+            System.out.println("5.Exit");
+            int ch = sc.nextInt();
+            sc.nextLine();
+            switch (ch){
+                case 1:
+                    // viewbooks
+                    break;
+                case 2:
+                    // rentbook
+                    break;
+                case 3:
+                    // returnbook
+                    break;
+                case 4:
+                    //renewbook
+                    break;
+                case 5:
+                    System.out.println("Thankyou for Using our library!!!");
+                    System.out.println("Keep Reading !!");
+                    return;
+                default:
+                    System.out.println("Enter a valid choice");
+            }
+        }
     }
 }
