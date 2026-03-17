@@ -1,11 +1,10 @@
-import java.sql.SQLOutput;
+package atm;
 import java.util.HashMap;
-import java.util.List;
 import java.util.*;
 
 public class ATM {
     Scanner sc = new Scanner(System.in);
-    private HashMap< Long , Account> accounts = new HashMap<>();
+    private HashMap<Long, atm.Account> accounts = new HashMap<>();
     private long nextAccNo = 1001;
     private double atmBalance = 5_00_000;
     private int dailtTrans = 0;
@@ -34,13 +33,13 @@ public class ATM {
             }
             break;
         }
-        accounts.put(nextAccNo , new Account(name , nextAccNo , pin , amt));
+        accounts.put(nextAccNo, new atm.Account(name, nextAccNo, pin, amt));
         System.out.println("Account created Successfully !!!");
         accounts.get(nextAccNo).printAccDetails();
         nextAccNo++;
     }
-    public void userLogin(){
 
+    public void userLogin(){
         System.out.println("Enter your account number : ");
         long accNo = sc.nextLong();
         if(!accounts.containsKey(accNo)) {
@@ -67,7 +66,6 @@ public class ATM {
             System.out.println("8.Exit");
             int choice = sc.nextInt();
             switch (choice){
-
                 case 1:
                     System.out.println("--------Deposit---------");
                     System.out.println("Enter the no of 500's:");
@@ -168,14 +166,15 @@ public class ATM {
                     break;
                 case 8:
                     return;
-                default :
+                default:
                     System.out.println("Enter a valid choice");
                     break;
             }
         }
     }
+
     public void adminLogin(){
-        Admin admin = new Admin();
+        atm.Admin admin = new atm.Admin();
         System.out.println("Enter Admin username : ");
         String adminUserName = sc.next();
         System.out.println("Enter Admin Password : ");

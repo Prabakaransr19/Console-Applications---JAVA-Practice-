@@ -1,3 +1,4 @@
+package atm;
 public class Account {
     private String userName;
     private long accountNumber;
@@ -38,14 +39,14 @@ public class Account {
         return this.pin == pin;
     }
 
-    public void addTranscation(String type,double amt){
+    public void addTranscation(String type, double amt){
         int idx = (tIdx%5);
         transHistory[idx] = type+" "+amt;
         tIdx++;
     }
 
     public boolean deposit(double amt){
-        if(amt<0)return false;
+        if(amt<0) return false;
         this.balance += amt;
         addTranscation("Deposit" , amt);
         return true;
@@ -61,6 +62,7 @@ public class Account {
     public void changePin(int newPin){
         this.pin = newPin;
     }
+
     public void printMiniStatement(){
         System.out.println("------------Mini Statement--------------");
         if(tIdx==0){
