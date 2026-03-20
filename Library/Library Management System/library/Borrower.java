@@ -7,4 +7,5 @@ public class Borrower extends User{
         setEmail(email);
         setPassword(password);
     }
+
 }

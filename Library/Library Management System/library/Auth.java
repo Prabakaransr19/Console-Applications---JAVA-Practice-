@@ -50,7 +50,8 @@ public class Auth {
             System.out.println("4.View all books in sorted order(a-z)");
             System.out.println("5.View all books in sorted order(Based n quantity)");
             System.out.println("6.Search a book");
-            System.out.println("7.Exit");
+            System.out.println("7.Edit a Book details");
+            System.out.println("8.Exit");
             int ch = sc.nextInt();
             sc.nextLine();
             switch (ch){
@@ -73,6 +74,9 @@ public class Auth {
                     library.searchBook();
                     break;
                 case 7:
+                    library.editBookDetails();
+                    break;
+                case 8:
                     System.out.println("Thankyou for your Service !!!");
                     return;
                 default:

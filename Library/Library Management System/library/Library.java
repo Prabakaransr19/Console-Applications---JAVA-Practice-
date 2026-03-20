@@ -37,6 +37,44 @@ public class Library {
             books.get(id).displayBookDetails();
         }
     }
+    public void editBookDetails(){
+        System.out.println("Enter the book id to edit : ");
+        int id = sc.nextInt();
+        while(true){
+            System.out.println("Choose what to change !!");
+            System.out.println("1.Title");
+            System.out.println("2.Author name");
+            System.out.println("3.Price");
+            System.out.println("4.Exit");
+            int ch = sc.nextInt();
+            switch(ch){
+                case 1:
+                    System.out.println("Enter new title to change : ");
+                    String title = sc.nextLine();
+                    books.get(id).setTitle(title);
+                    System.out.println("Title changed successfully !!");
+                    break;
+                case 2:
+                    System.out.println("Enter new Author name : ");
+                    String name  = sc.nextLine();
+                    books.get(id).setAuthor(name);
+                    System.out.println("Author name changed successfully !!");
+                    break;
+                case 3:
+                    System.out.println("Enter new price : ");
+                    double price = sc.nextDouble();
+                    books.get(id).setPrice(price);
+                    System.out.println("Price changed success fully !!");
+                    break;
+                case 4:
+                    return;
+                default:
+                    System.out.println("Enter a valid choice !!!");
+                    break;
+            }
+            break;
+        }
+    }
     public void searchBook(){
         System.out.println("Enter a choice to search :");
         System.out.println("1.Search by ID ");
