@@ -37,6 +37,9 @@ public class Library {
             books.get(id).displayBookDetails();
         }
     }
+    public void borrowBook(Book book){
+        book.setQty(book.getQty()-1);
+    }
     public void editBookDetails(){
         System.out.println("Enter the book id to edit : ");
         int id = sc.nextInt();
@@ -107,6 +110,14 @@ public class Library {
                 System.out.println("Enter a valid choice");
                 break;
         }
+    }
+    public Book findBook(String title){
+        for(Integer id : books.keySet()){
+            if((books.get(id).getTitle()).equals(title)){
+                return books.get(id);
+            }
+        }
+        return null;
     }
     public void sortByTitle(){
         List<String> list = new ArrayList<>();

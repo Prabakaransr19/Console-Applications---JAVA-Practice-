@@ -1,7 +1,9 @@
 package library;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+
 public class Auth {
     Scanner sc = new Scanner(System.in);
     Library library = new Library();
@@ -91,19 +93,88 @@ public class Auth {
             System.out.println("1.View Books");
             System.out.println("2.Rent a Book");
             System.out.println("3.Return a Book");
-            System.out.println("4.Renew a book");
+//            System.out.println("4.Renew a book");
             System.out.println("5.Exit");
             int ch = sc.nextInt();
             sc.nextLine();
             switch (ch){
                 case 1:
-                    // viewbooks
+                    System.out.println("List of all books avilable !");
+                    library.displayAllBooks();
                     break;
                 case 2:
-                    // rentbook
+                    System.out.println("Welcome to rental portal !!");
+                    System.out.println("Avilable books");
+                    library.displayAllBooks();
+                    List<Book> cart = new ArrayList<>();
+                    while(true){
+                        System.out.println("Enter the book name you want to select : ");
+                        String title = sc.nextLine();
+                        Book book = library.findBook(title);
+
+                        if(book==null || cart.contains(book)){
+                            System.out.println("Invalid book name (or) same book cannot borrowed twice! try Again");
+                            continue;
+                        }
+                        if(book.getQty()<1){
+                            System.out.println("Book not avilable !!");
+                            System.out.println("Try different books !!");
+                        }
+                        cart.add(book);
+                        System.out.println("Do you want to add another book (press y to continue)?");
+                        char c = sc.next().charAt(0);
+                        if(c=='Y' || c=='y'){
+                            continue;
+                        }
+                        break;
+                    }
+                    if(cart.size() +((Borrower)users.get(email)).getCurrentBorrows() >3){
+                        System.out.println("only 3 books allowed per person");
+                        return;
+                    }
+                    for (Book b:cart){
+                        // just for now testing purposr manual date is given leter it ll be fixed on
+                        library.borrowBook(b);
+                        Transaction tra = new Transaction(b , (Borrower) users.get(email) , LocalDate.parse("2026-03-15"));
+                        ((Borrower) users.get(email)).transactions.add(tra);
+                    }
+                    System.out.println("Your order is out now !!");
                     break;
                 case 3:
-                    // returnbook
+                    System.out.println("Return book ");
+                    System.out.println("List of Borrowed Books");
+                    ((Borrower)users.get(email)).getCurrentBorrowsList();
+                    while(true){
+                        System.out.println("enter the book title you want to return");
+                        String title = sc.nextLine();
+                        Book book = library.findBook(title);
+                        if(book==null){
+                            System.out.println("Invalid book name try again");
+                            continue;
+                        }
+                        Transaction t = ((Borrower)users.get(email)).findTransaction(book);
+                        if(t==null){
+                            System.out.println("No Borrow history found with this book !");
+                            System.out.println("Try again !");
+                            continue;
+                        }
+                        t.markAsReturned();
+                        long daysBetween = ChronoUnit.DAYS.between(t.getBdate(), t.getRdate());
+                        double fine = 0;
+                        if(daysBetween > 15){
+                            fine = (daysBetween-15)*2;
+                            System.out.println("Fine for exceeding the Actual Return date : "+fine);
+                            System.out.println("Pay your fine to the Librarien !!");
+                        }
+
+                        System.out.println("Do you want to return another book (press y to continue)?");
+                        char c = sc.next().charAt(0);
+                        if(c=='Y' || c=='y'){
+                            continue;
+                        }
+                        break;
+
+                    }
                     break;
                 case 4:
                     //renewbook
